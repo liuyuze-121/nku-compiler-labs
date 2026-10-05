@@ -1,0 +1,265 @@
+
+fib：     文件格式 elf64-littleriscv
+
+
+Disassembly of section .plt:
+
+00000000000008c0 <.plt>:
+ 8c0:	00001397          	auipc	t2,0x1
+ 8c4:	41c30333          	sub	t1,t1,t3
+ 8c8:	7483be03          	ld	t3,1864(t2) # 2008 <__TMC_END__>
+ 8cc:	fd430313          	addi	t1,t1,-44
+ 8d0:	74838293          	addi	t0,t2,1864
+ 8d4:	00135313          	srli	t1,t1,0x1
+ 8d8:	0082b283          	ld	t0,8(t0)
+ 8dc:	000e0067          	jr	t3
+
+00000000000008e0 <_ZNSirsERi@plt>:
+ 8e0:	00001e17          	auipc	t3,0x1
+ 8e4:	738e3e03          	ld	t3,1848(t3) # 2018 <_ZNSirsERi@GLIBCXX_3.4>
+ 8e8:	000e0367          	jalr	t1,t3
+ 8ec:	00000013          	nop
+
+00000000000008f0 <__libc_start_main@plt>:
+ 8f0:	00001e17          	auipc	t3,0x1
+ 8f4:	730e3e03          	ld	t3,1840(t3) # 2020 <__libc_start_main@GLIBC_2.34>
+ 8f8:	000e0367          	jalr	t1,t3
+ 8fc:	00000013          	nop
+
+0000000000000900 <_ZNSolsEPFRSoS_E@plt>:
+ 900:	00001e17          	auipc	t3,0x1
+ 904:	728e3e03          	ld	t3,1832(t3) # 2028 <_ZNSolsEPFRSoS_E@GLIBCXX_3.4>
+ 908:	000e0367          	jalr	t1,t3
+ 90c:	00000013          	nop
+
+0000000000000910 <_ZNSt8ios_base4InitC1Ev@plt>:
+ 910:	00001e17          	auipc	t3,0x1
+ 914:	720e3e03          	ld	t3,1824(t3) # 2030 <_ZNSt8ios_base4InitC1Ev@GLIBCXX_3.4>
+ 918:	000e0367          	jalr	t1,t3
+ 91c:	00000013          	nop
+
+0000000000000920 <__stack_chk_fail@plt>:
+ 920:	00001e17          	auipc	t3,0x1
+ 924:	718e3e03          	ld	t3,1816(t3) # 2038 <__stack_chk_fail@GLIBC_2.27>
+ 928:	000e0367          	jalr	t1,t3
+ 92c:	00000013          	nop
+
+0000000000000930 <_ZNSolsEi@plt>:
+ 930:	00001e17          	auipc	t3,0x1
+ 934:	710e3e03          	ld	t3,1808(t3) # 2040 <_ZNSolsEi@GLIBCXX_3.4>
+ 938:	000e0367          	jalr	t1,t3
+ 93c:	00000013          	nop
+
+0000000000000940 <__cxa_atexit@plt>:
+ 940:	00001e17          	auipc	t3,0x1
+ 944:	708e3e03          	ld	t3,1800(t3) # 2048 <__cxa_atexit@GLIBC_2.27>
+ 948:	000e0367          	jalr	t1,t3
+ 94c:	00000013          	nop
+
+Disassembly of section .text:
+
+0000000000000950 <_start>:
+ 950:	022000ef          	jal	ra,972 <load_gp>
+ 954:	87aa                	mv	a5,a0
+ 956:	00001517          	auipc	a0,0x1
+ 95a:	70a53503          	ld	a0,1802(a0) # 2060 <_GLOBAL_OFFSET_TABLE_+0x10>
+ 95e:	6582                	ld	a1,0(sp)
+ 960:	0030                	addi	a2,sp,8
+ 962:	ff017113          	andi	sp,sp,-16
+ 966:	4681                	li	a3,0
+ 968:	4701                	li	a4,0
+ 96a:	880a                	mv	a6,sp
+ 96c:	f85ff0ef          	jal	ra,8f0 <__libc_start_main@plt>
+ 970:	9002                	ebreak
+
+0000000000000972 <load_gp>:
+ 972:	00002197          	auipc	gp,0x2
+ 976:	e8e18193          	addi	gp,gp,-370 # 2800 <__global_pointer$>
+ 97a:	8082                	ret
+	...
+
+000000000000097e <deregister_tm_clones>:
+ 97e:	00001517          	auipc	a0,0x1
+ 982:	68a50513          	addi	a0,a0,1674 # 2008 <__TMC_END__>
+ 986:	00001797          	auipc	a5,0x1
+ 98a:	68278793          	addi	a5,a5,1666 # 2008 <__TMC_END__>
+ 98e:	00a78863          	beq	a5,a0,99e <deregister_tm_clones+0x20>
+ 992:	00001797          	auipc	a5,0x1
+ 996:	6ee7b783          	ld	a5,1774(a5) # 2080 <_ITM_deregisterTMCloneTable@Base>
+ 99a:	c391                	beqz	a5,99e <deregister_tm_clones+0x20>
+ 99c:	8782                	jr	a5
+ 99e:	8082                	ret
+
+00000000000009a0 <register_tm_clones>:
+ 9a0:	00001517          	auipc	a0,0x1
+ 9a4:	66850513          	addi	a0,a0,1640 # 2008 <__TMC_END__>
+ 9a8:	00001597          	auipc	a1,0x1
+ 9ac:	66058593          	addi	a1,a1,1632 # 2008 <__TMC_END__>
+ 9b0:	8d89                	sub	a1,a1,a0
+ 9b2:	4035d793          	srai	a5,a1,0x3
+ 9b6:	91fd                	srli	a1,a1,0x3f
+ 9b8:	95be                	add	a1,a1,a5
+ 9ba:	8585                	srai	a1,a1,0x1
+ 9bc:	c599                	beqz	a1,9ca <register_tm_clones+0x2a>
+ 9be:	00001797          	auipc	a5,0x1
+ 9c2:	6d27b783          	ld	a5,1746(a5) # 2090 <_ITM_registerTMCloneTable@Base>
+ 9c6:	c391                	beqz	a5,9ca <register_tm_clones+0x2a>
+ 9c8:	8782                	jr	a5
+ 9ca:	8082                	ret
+
+00000000000009cc <__do_global_dtors_aux>:
+ 9cc:	1141                	addi	sp,sp,-16
+ 9ce:	e022                	sd	s0,0(sp)
+ 9d0:	00001417          	auipc	s0,0x1
+ 9d4:	6d040413          	addi	s0,s0,1744 # 20a0 <completed.0>
+ 9d8:	00044783          	lbu	a5,0(s0)
+ 9dc:	e406                	sd	ra,8(sp)
+ 9de:	e385                	bnez	a5,9fe <__do_global_dtors_aux+0x32>
+ 9e0:	00001797          	auipc	a5,0x1
+ 9e4:	6907b783          	ld	a5,1680(a5) # 2070 <__cxa_finalize@GLIBC_2.27>
+ 9e8:	c791                	beqz	a5,9f4 <__do_global_dtors_aux+0x28>
+ 9ea:	00001517          	auipc	a0,0x1
+ 9ee:	61653503          	ld	a0,1558(a0) # 2000 <__dso_handle>
+ 9f2:	9782                	jalr	a5
+ 9f4:	f8bff0ef          	jal	ra,97e <deregister_tm_clones>
+ 9f8:	4785                	li	a5,1
+ 9fa:	00f40023          	sb	a5,0(s0)
+ 9fe:	60a2                	ld	ra,8(sp)
+ a00:	6402                	ld	s0,0(sp)
+ a02:	0141                	addi	sp,sp,16
+ a04:	8082                	ret
+
+0000000000000a06 <frame_dummy>:
+ a06:	bf69                	j	9a0 <register_tm_clones>
+
+0000000000000a08 <main>:
+ a08:	7179                	addi	sp,sp,-48
+ a0a:	f406                	sd	ra,40(sp)
+ a0c:	f022                	sd	s0,32(sp)
+ a0e:	1800                	addi	s0,sp,48
+ a10:	00001797          	auipc	a5,0x1
+ a14:	6487b783          	ld	a5,1608(a5) # 2058 <__stack_chk_guard@GLIBC_2.27>
+ a18:	6398                	ld	a4,0(a5)
+ a1a:	fee43423          	sd	a4,-24(s0)
+ a1e:	4701                	li	a4,0
+ a20:	fc042c23          	sw	zero,-40(s0)
+ a24:	4785                	li	a5,1
+ a26:	fcf42e23          	sw	a5,-36(s0)
+ a2a:	4785                	li	a5,1
+ a2c:	fef42023          	sw	a5,-32(s0)
+ a30:	fd440793          	addi	a5,s0,-44
+ a34:	85be                	mv	a1,a5
+ a36:	00001517          	auipc	a0,0x1
+ a3a:	65253503          	ld	a0,1618(a0) # 2088 <_ZSt3cin@GLIBCXX_3.4>
+ a3e:	ea3ff0ef          	jal	ra,8e0 <_ZNSirsERi@plt>
+ a42:	fd842783          	lw	a5,-40(s0)
+ a46:	85be                	mv	a1,a5
+ a48:	00001517          	auipc	a0,0x1
+ a4c:	63053503          	ld	a0,1584(a0) # 2078 <_ZSt4cout@GLIBCXX_3.4>
+ a50:	ee1ff0ef          	jal	ra,930 <_ZNSolsEi@plt>
+ a54:	87aa                	mv	a5,a0
+ a56:	00001597          	auipc	a1,0x1
+ a5a:	6125b583          	ld	a1,1554(a1) # 2068 <_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GLIBCXX_3.4>
+ a5e:	853e                	mv	a0,a5
+ a60:	ea1ff0ef          	jal	ra,900 <_ZNSolsEPFRSoS_E@plt>
+ a64:	fdc42783          	lw	a5,-36(s0)
+ a68:	85be                	mv	a1,a5
+ a6a:	00001517          	auipc	a0,0x1
+ a6e:	60e53503          	ld	a0,1550(a0) # 2078 <_ZSt4cout@GLIBCXX_3.4>
+ a72:	ebfff0ef          	jal	ra,930 <_ZNSolsEi@plt>
+ a76:	87aa                	mv	a5,a0
+ a78:	00001597          	auipc	a1,0x1
+ a7c:	5f05b583          	ld	a1,1520(a1) # 2068 <_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GLIBCXX_3.4>
+ a80:	853e                	mv	a0,a5
+ a82:	e7fff0ef          	jal	ra,900 <_ZNSolsEPFRSoS_E@plt>
+ a86:	a0b9                	j	ad4 <main+0xcc>
+ a88:	fdc42783          	lw	a5,-36(s0)
+ a8c:	fef42223          	sw	a5,-28(s0)
+ a90:	fdc42783          	lw	a5,-36(s0)
+ a94:	873e                	mv	a4,a5
+ a96:	fd842783          	lw	a5,-40(s0)
+ a9a:	9fb9                	addw	a5,a5,a4
+ a9c:	fcf42e23          	sw	a5,-36(s0)
+ aa0:	fdc42783          	lw	a5,-36(s0)
+ aa4:	85be                	mv	a1,a5
+ aa6:	00001517          	auipc	a0,0x1
+ aaa:	5d253503          	ld	a0,1490(a0) # 2078 <_ZSt4cout@GLIBCXX_3.4>
+ aae:	e83ff0ef          	jal	ra,930 <_ZNSolsEi@plt>
+ ab2:	87aa                	mv	a5,a0
+ ab4:	00001597          	auipc	a1,0x1
+ ab8:	5b45b583          	ld	a1,1460(a1) # 2068 <_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GLIBCXX_3.4>
+ abc:	853e                	mv	a0,a5
+ abe:	e43ff0ef          	jal	ra,900 <_ZNSolsEPFRSoS_E@plt>
+ ac2:	fe442783          	lw	a5,-28(s0)
+ ac6:	fcf42c23          	sw	a5,-40(s0)
+ aca:	fe042783          	lw	a5,-32(s0)
+ ace:	2785                	addiw	a5,a5,1
+ ad0:	fef42023          	sw	a5,-32(s0)
+ ad4:	fd442703          	lw	a4,-44(s0)
+ ad8:	fe042783          	lw	a5,-32(s0)
+ adc:	2781                	sext.w	a5,a5
+ ade:	fae7c5e3          	blt	a5,a4,a88 <main+0x80>
+ ae2:	4781                	li	a5,0
+ ae4:	873e                	mv	a4,a5
+ ae6:	00001797          	auipc	a5,0x1
+ aea:	5727b783          	ld	a5,1394(a5) # 2058 <__stack_chk_guard@GLIBC_2.27>
+ aee:	fe843683          	ld	a3,-24(s0)
+ af2:	639c                	ld	a5,0(a5)
+ af4:	8fb5                	xor	a5,a5,a3
+ af6:	4681                	li	a3,0
+ af8:	c399                	beqz	a5,afe <main+0xf6>
+ afa:	e27ff0ef          	jal	ra,920 <__stack_chk_fail@plt>
+ afe:	853a                	mv	a0,a4
+ b00:	70a2                	ld	ra,40(sp)
+ b02:	7402                	ld	s0,32(sp)
+ b04:	6145                	addi	sp,sp,48
+ b06:	8082                	ret
+
+0000000000000b08 <_Z41__static_initialization_and_destruction_0ii>:
+ b08:	1101                	addi	sp,sp,-32
+ b0a:	ec06                	sd	ra,24(sp)
+ b0c:	e822                	sd	s0,16(sp)
+ b0e:	1000                	addi	s0,sp,32
+ b10:	87aa                	mv	a5,a0
+ b12:	872e                	mv	a4,a1
+ b14:	fef42623          	sw	a5,-20(s0)
+ b18:	87ba                	mv	a5,a4
+ b1a:	fef42423          	sw	a5,-24(s0)
+ b1e:	fec42783          	lw	a5,-20(s0)
+ b22:	0007871b          	sext.w	a4,a5
+ b26:	4785                	li	a5,1
+ b28:	02f71e63          	bne	a4,a5,b64 <_Z41__static_initialization_and_destruction_0ii+0x5c>
+ b2c:	fe842783          	lw	a5,-24(s0)
+ b30:	0007871b          	sext.w	a4,a5
+ b34:	67c1                	lui	a5,0x10
+ b36:	17fd                	addi	a5,a5,-1 # ffff <__global_pointer$+0xd7ff>
+ b38:	02f71663          	bne	a4,a5,b64 <_Z41__static_initialization_and_destruction_0ii+0x5c>
+ b3c:	00001517          	auipc	a0,0x1
+ b40:	56c50513          	addi	a0,a0,1388 # 20a8 <_ZStL8__ioinit>
+ b44:	dcdff0ef          	jal	ra,910 <_ZNSt8ios_base4InitC1Ev@plt>
+ b48:	00001617          	auipc	a2,0x1
+ b4c:	4b860613          	addi	a2,a2,1208 # 2000 <__dso_handle>
+ b50:	00001597          	auipc	a1,0x1
+ b54:	55858593          	addi	a1,a1,1368 # 20a8 <_ZStL8__ioinit>
+ b58:	00001517          	auipc	a0,0x1
+ b5c:	54053503          	ld	a0,1344(a0) # 2098 <_ZNSt8ios_base4InitD1Ev@GLIBCXX_3.4>
+ b60:	de1ff0ef          	jal	ra,940 <__cxa_atexit@plt>
+ b64:	0001                	nop
+ b66:	60e2                	ld	ra,24(sp)
+ b68:	6442                	ld	s0,16(sp)
+ b6a:	6105                	addi	sp,sp,32
+ b6c:	8082                	ret
+
+0000000000000b6e <_GLOBAL__sub_I_main>:
+ b6e:	1141                	addi	sp,sp,-16
+ b70:	e406                	sd	ra,8(sp)
+ b72:	e022                	sd	s0,0(sp)
+ b74:	0800                	addi	s0,sp,16
+ b76:	67c1                	lui	a5,0x10
+ b78:	fff78593          	addi	a1,a5,-1 # ffff <__global_pointer$+0xd7ff>
+ b7c:	4505                	li	a0,1
+ b7e:	f8bff0ef          	jal	ra,b08 <_Z41__static_initialization_and_destruction_0ii>
+ b82:	60a2                	ld	ra,8(sp)
+ b84:	6402                	ld	s0,0(sp)
+ b86:	0141                	addi	sp,sp,16
+ b88:	8082                	ret

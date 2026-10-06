@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+; Function Attrs: noinline nounwind optnone uwtable
+define dso\PYGZus{}local i32 @main() local\PYGZus{}unnamed\PYGZus{}addr \PYGZsh{}0 \PYGZob{}
+\end{MintedVerbatim}

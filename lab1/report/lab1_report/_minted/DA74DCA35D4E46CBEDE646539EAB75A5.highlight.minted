@@ -1,0 +1,7 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+
+llc\PYG{+w}{ }main.ll\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}llvm.S
+gcc\PYG{+w}{ }main.i\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}x86.S
+arm\PYGZhy{}linux\PYGZhy{}gnueabihf\PYGZhy{}gcc\PYG{+w}{ }main.i\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}arm.S
+ls\PYG{+w}{ }\PYGZhy{}lh\PYG{+w}{ }main\PYGZhy{}llvm.S\PYG{+w}{ }main\PYGZhy{}x86.S\PYG{+w}{ }main\PYGZhy{}arm.S
+\end{MintedVerbatim}

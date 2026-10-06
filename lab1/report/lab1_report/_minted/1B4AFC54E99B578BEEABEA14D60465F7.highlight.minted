@@ -1,0 +1,38 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYGZpc{}1 = alloca i32, align 4
+\PYGZpc{}2 = bitcast i32* \PYGZpc{}1 to i8*
+call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull \PYGZpc{}2) \PYGZsh{}3
+\PYGZpc{}3 = call i32 (i8*, ...) @\PYGZus{}\PYGZus{}isoc99\PYGZus{}scanf(
+        i8* noundef getelementptr inbounds ([3 x i8], [3 x i8]* @.str,
+        i64 0, i64 0), i32* noundef nonnull \PYGZpc{}1)
+\PYGZpc{}4 = call i32 (i8*, ...) @printf(
+        i8* noundef nonnull dereferenceable(1)
+        getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1,
+        i64 0, i64 0), i32 noundef 0)
+\PYGZpc{}5 = call i32 (i8*, ...) @printf(
+        i8* noundef nonnull dereferenceable(1)
+        getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1,
+        i64 0, i64 0), i32 noundef 1)
+\PYGZpc{}6 = load i32, i32* \PYGZpc{}1, align 4, !tbaa !5
+\PYGZpc{}7 = icmp sgt i32 \PYGZpc{}6, 1
+br i1 \PYGZpc{}7, label \PYGZpc{}8, label \PYGZpc{}17
+
+8:
+  \PYGZpc{}9  = phi i32 [ \PYGZpc{}11, \PYGZpc{}8 ], [ 0, \PYGZpc{}0 ]
+  \PYGZpc{}10 = phi i32 [ \PYGZpc{}14, \PYGZpc{}8 ], [ 1, \PYGZpc{}0 ]
+  \PYGZpc{}11 = phi i32 [ \PYGZpc{}12, \PYGZpc{}8 ], [ 1, \PYGZpc{}0 ]
+  \PYGZpc{}12 = add nsw i32 \PYGZpc{}9, \PYGZpc{}11
+  \PYGZpc{}13 = call i32 (i8*, ...) @printf(
+        i8* noundef nonnull dereferenceable(1)
+        getelementptr inbounds ([4 x i8], [4 x i8]* @.str.1,
+        i64 0, i64 0),
+        i32 noundef \PYGZpc{}12)
+  \PYGZpc{}14 = add nuw nsw i32 \PYGZpc{}10, 1
+  \PYGZpc{}15 = load i32, i32* \PYGZpc{}1, align 4, !tbaa !5
+  \PYGZpc{}16 = icmp slt i32 \PYGZpc{}14, \PYGZpc{}15
+  br i1 \PYGZpc{}16, label \PYGZpc{}8, label \PYGZpc{}17, !llvm.loop !9
+
+17:
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull \PYGZpc{}2) \PYGZsh{}3
+  ret i32 0
+\end{MintedVerbatim}

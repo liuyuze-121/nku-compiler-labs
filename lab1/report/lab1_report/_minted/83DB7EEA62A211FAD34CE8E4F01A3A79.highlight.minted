@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+fibonacci.s\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }fibonacci\PYG{+w}{ }\PYGZhy{}static
+qemu\PYGZhy{}riscv64\PYG{+w}{ }fibonacci
+\end{MintedVerbatim}

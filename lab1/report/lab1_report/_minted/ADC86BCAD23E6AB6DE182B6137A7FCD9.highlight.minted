@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+clang\PYG{+w}{ }\PYGZhy{}O0\PYG{+w}{ }bench.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }bench\PYGZhy{}O0
+clang\PYG{+w}{ }\PYGZhy{}O1\PYG{+w}{ }bench.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }bench\PYGZhy{}O1
+clang\PYG{+w}{ }\PYGZhy{}O2\PYG{+w}{ }bench.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }bench\PYGZhy{}O2
+clang\PYG{+w}{ }\PYGZhy{}O3\PYG{+w}{ }bench.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }bench\PYGZhy{}O3
+
+ls\PYG{+w}{ }\PYGZhy{}lh\PYG{+w}{ }bench\PYGZhy{}O0\PYG{+w}{ }bench\PYGZhy{}O1\PYG{+w}{ }bench\PYGZhy{}O2\PYG{+w}{ }bench\PYGZhy{}O3
+\end{MintedVerbatim}

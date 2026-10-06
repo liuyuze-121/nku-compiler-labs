@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+sed\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}/\PYGZca{}define dso\PYGZus{}local i32 @main/,/\PYGZca{}\PYGZcb{}/p\PYGZsq{}}\PYG{+w}{ }main\PYGZhy{}O0.ll
+sed\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}/\PYGZca{}define dso\PYGZus{}local i32 @main/,/\PYGZca{}\PYGZcb{}/p\PYGZsq{}}\PYG{+w}{ }main\PYGZhy{}O1.ll
+\end{MintedVerbatim}

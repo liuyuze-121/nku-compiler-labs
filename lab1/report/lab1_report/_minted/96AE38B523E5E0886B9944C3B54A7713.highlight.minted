@@ -1,0 +1,6 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{printf}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}40 1000000\PYGZbs{}n\PYGZdq{}}\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }./bench\PYGZhy{}O0
+\PYG{n+nb}{printf}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}40 1000000\PYGZbs{}n\PYGZdq{}}\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }./bench\PYGZhy{}O1
+\PYG{n+nb}{printf}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}40 1000000\PYGZbs{}n\PYGZdq{}}\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }./bench\PYGZhy{}O2
+\PYG{n+nb}{printf}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}40 1000000\PYGZbs{}n\PYGZdq{}}\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }./bench\PYGZhy{}O3
+\end{MintedVerbatim}

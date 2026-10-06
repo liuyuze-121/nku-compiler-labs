@@ -175,12 +175,12 @@ rulesepcolor= \color{ red!20!green!20!blue!20}
 \subsection{分工}
 选用 \texttt{risc-v} 作为实验框架
 
-刘宇泽（2411334）负责完成\textbf{任务一}的完整的编译过程、预处理器的任务、编译器的任务以及\textbf{任务二}。
+刘宇泽（2411334）负责完成\textbf{任务一}的完整的编译过程、预处理器的任务、编译器的任务、\textbf{任务二}及进阶要求。
 
-孙锘梵（2410868）负责完成\textbf{任务一}的汇编器的任务、链接器的任务以及\textbf{任务三}。
+孙锘梵（2410868）负责完成\textbf{任务一}的汇编器的任务、链接器的任务、\textbf{任务三}。
 %----------------------------------------------------------------
 \newpage
-\section{实验内容}
+\section{基础要求}
 %——————————————————————————————————————
 \subsection{了解编译器工作过程}
 
@@ -1338,6 +1338,8 @@ riscv64-unknown-elf-gcc main.o ~/lib/libsysy_riscv.a -o main -static
 以斐波那契数列程序为例，使用 RISC-V 汇编语言实现与 C 程序相同的功能。
 源程序 \verb|fibonacci.c| 如下：
 
+\subsubsection{实验程序}
+
 \begin{minted}[frame=single, linenos=true]{c}
 #include <stdio.h>
 
@@ -1494,7 +1496,7 @@ main:
 程序结束时，将 \verb|a0| 置为 0 作为返回值，依次恢复保存过的寄存器，使用
 \verb|addi sp, sp, 64| 释放栈空间，最后通过 \verb|ret| 返回调用者。
 
-\textbf{运行验证}
+\subsubsection{运行验证}
 
 使用 RISC-V 交叉编译器和 QEMU 运行程序：
 
@@ -1516,7 +1518,7 @@ qemu-riscv64 fibonacci
 汇编程序中的变量初始化、输入、循环计算和输出均正确。
 
 
-\textbf{反汇编验证}
+\subsubsection{反汇编验证}
 
 为了观察汇编器最终生成的目标指令，执行：
 
@@ -1543,6 +1545,145 @@ riscv64-linux-gnu-objdump -d fibonacci \
 返回。
 
 
+
+%----------------------------------------------------------------
+\newpage
+\section{进阶要求}
+%——————————————————————————————————————
+\subsection{实验目的}
+
+本部分以逐元素向量加法为例，观察 MLIR 如何把同一段程序从高层结构化表示
+逐步降低为低层控制流和 LLVM 方言，并最终翻译成 LLVM IR。
+
+\subsection{实验过程}
+
+实验在 WSL Ubuntu 22.04 中进行，使用 \verb|mlir-opt-14| 和
+\verb|mlir-translate-14|。测试用例 \verb|vecadd.mlir| 完成
+\verb|C[i] = A[i] + B[i]| 的计算，三个数组均为
+\verb|memref<16xi16>|。最开始的样例代码如下：
+
+\begin{minted}{text}
+#map = affine_map<(d0) -> (d0)>
+module {
+  func @vecadd(%arg0: memref<16xi16>, %arg1: memref<16xi16>,
+               %arg2: memref<16xi16>) {
+    linalg.generic {indexing_maps = [#map, #map, #map],
+                    iterator_types = ["parallel"]}
+        ins(%arg0, %arg1 : memref<16xi16>, memref<16xi16>)
+        outs(%arg2 : memref<16xi16>) {
+    ^bb0(%arg3: i16, %arg4: i16, %arg5: i16):
+      %0 = arith.addi %arg3, %arg4 : i16
+      linalg.yield %0 : i16
+    }
+    return
+  }
+}
+\end{minted}
+
+该样例用 \verb|linalg.generic| 描述逐元素加法。进入实验目录后，依次执行不同 lowering pass，
+并保存每一阶段的输出：
+
+\begin{minted}{bash}
+
+mlir-opt-14 vecadd.mlir \
+    | tee vecadd-high-level.mlir
+
+mlir-opt-14 --convert-linalg-to-loops vecadd.mlir \
+    | tee vecadd-linalg-to-loops.mlir
+
+mlir-opt-14 --convert-linalg-to-loops --convert-scf-to-std \
+    vecadd.mlir | tee vecadd-scf-to-cfg.mlir
+
+mlir-opt-14 --convert-linalg-to-loops --convert-scf-to-std \
+    --convert-std-to-llvm --convert-memref-to-llvm \
+    --reconcile-unrealized-casts vecadd.mlir \
+    | tee vecadd-llvm-dialect.mlir
+
+mlir-translate-14 --mlir-to-llvmir \
+    vecadd-llvm-dialect.mlir -o vecadd.ll
+sed -n '1,120p' vecadd.ll
+\end{minted}
+
+\textbf{逐级降低过程}
+
+最初的高层 MLIR 使用 \verb|linalg.generic| 描述向量加法。索引映射
+\verb|affine_map<(d0) -> (d0)>| 表示输入和输出按同一维下标访问，
+\verb|iterator_types = ["parallel"]| 表明该操作可以并行执行；计算体中的
+\verb|arith.addi| 完成两个 \verb|i16| 元素相加。该层主要描述“做什么”，
+尚未显式展开循环和内存访问。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/mlir-vecadd-high-level.png}
+    \caption{VecAdd 的高层 Linalg MLIR}
+    \label{fig:mlir-vecadd-high-level}
+\end{figure}
+
+执行 \verb|--convert-linalg-to-loops| 后，\verb|linalg.generic| 被转换为
+\verb|scf.for| 循环。循环下界、上界和步长分别由 \verb|arith.constant|
+给出，数组访问被展开为 \verb|memref.load| 和 \verb|memref.store|，
+加法运算仍由 \verb|arith.addi| 完成。这一阶段把高层张量语义落实为显式
+循环和标量访存，但控制流仍保持结构化形式。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/mlir-vecadd-linalg-to-loops.png}
+    \caption{Linalg 降低为 SCF 循环后的 MLIR}
+    \label{fig:mlir-vecadd-linalg-to-loops}
+\end{figure}
+
+继续执行 \verb|--convert-scf-to-std|，\verb|scf.for| 被展开为基本块和
+分支指令。进入循环前使用 \verb|br| 跳转到条件判断块，循环条件由
+\verb|arith.cmpi| 计算，随后通过 \verb|cond_br| 分别跳转到循环体和退出块。
+循环体末尾再通过 \verb|br| 返回判断块，形成显式的 CFG。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/mlir-vecadd-scf-to-cfg.png}
+    \caption{SCF 降低为 CFG 后的 MLIR}
+    \label{fig:mlir-vecadd-scf-to-cfg}
+\end{figure}
+
+再经过 \verb|--convert-std-to-llvm|、\verb|--convert-memref-to-llvm| 和
+\verb|--reconcile-unrealized-casts|，程序进一步降低到 LLVM 方言。
+原来的函数、访存、算术和分支分别变为 \verb|llvm.func|、
+\verb|llvm.getelementptr|、\verb|llvm.load|、\verb|llvm.add|、
+\verb|llvm.store|、\verb|llvm.br| 和 \verb|llvm.cond_br|。此时程序已经
+接近机器级表示，但仍保留在 MLIR 框架中。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/mlir-vecadd-llvm-dialect.png}
+    \caption{VecAdd 降低为 LLVM 方言}
+    \label{fig:mlir-vecadd-llvm-dialect}
+\end{figure}
+
+最后使用 \verb|mlir-translate-14 --mlir-to-llvmir| 将 LLVM 方言翻译为
+标准 LLVM IR。输出中出现 \verb|define|、\verb|load|、\verb|add|、
+\verb|store|、\verb|br| 和 \verb|ret| 等 LLVM IR 指令；循环变量在基本块
+入口处通过 \verb|phi| 合并。至此，MLIR 完成了从高层方言到通用 LLVM IR
+的转换，后续可以交给 LLVM 后端继续优化并生成目标机器代码。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/mlir-vecadd-llvm-ir.png}
+    \caption{由 MLIR 翻译得到的 LLVM IR}
+    \label{fig:mlir-vecadd-llvm-ir}
+\end{figure}
+
+
+
+
+\textbf{实验小结}
+
+实验表明，MLIR 可以通过不同 dialect 和 pass 对同一语义进行渐进式降低：
+\verb|linalg| 保留高层向量语义，\verb|scf| 显式描述结构化循环，
+CFG 表示低层控制流，LLVM 方言则与通用后端衔接。AscendNPU IR 在通用
+多级降低思想的基础上增加了面向 NPU 的算子和地址空间，使编译器能够在
+保持中间表示可分析性的同时完成特定硬件后端映射。
+
+
+
 %----------------------------------------------------------------
 \newpage
 \section{总结}
@@ -1553,6 +1694,10 @@ LLVM IR 生成以及不同优化级别的结果，理解了源代码到中间表
 则通过汇编、反汇编、符号表和重定位信息，梳理了目标文件与可执行文件之间的联系。
 最终，LLVM IR 阶乘程序和 RISC-V 斐波那契程序均运行正确，使我们对编译系统各阶段的
 分工与协作有了更直观、完整的认识。
+
+在进阶要求中，又通过 MLIR 观察了 VecAdd 从 Linalg、SCF、CFG 到 LLVM 方言和
+LLVM IR 的逐级降低过程，并结合 AscendNPU IR 的示例理解了专用方言、硬件地址空间
+和编译后端映射之间的关系，进一步认识到多级中间表示和 pass 机制在编译器中的衔接作用。
 
 \noindent\textbf{仓库链接：}\url{https://github.com/liuyuze-121/nku-compiler-labs.git}
 

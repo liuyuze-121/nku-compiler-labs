@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+
+llvm\PYGZhy{}as\PYG{+w}{ }main.ll\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main.bc
+opt\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}O1\PYG{+w}{ }main.bc\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}opt\PYGZhy{}O1.ll
+opt\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}O2\PYG{+w}{ }main.bc\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}opt\PYGZhy{}O2.ll
+opt\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}O3\PYG{+w}{ }main.bc\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}opt\PYGZhy{}O3.ll
+
+\end{MintedVerbatim}

@@ -1,0 +1,87 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n+na}{.option}\PYG{+w}{ }\PYG{n+no}{nopic}
+\PYG{+w}{    }\PYG{n+na}{.attribute}\PYG{+w}{ }\PYG{n+no}{arch}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}rv64gc\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+na}{.attribute}\PYG{+w}{ }\PYG{n+no}{unaligned\PYGZus{}access}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{    }\PYG{n+na}{.attribute}\PYG{+w}{ }\PYG{n+no}{stack\PYGZus{}align}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{16}
+
+\PYG{+w}{    }\PYG{n+na}{.section}\PYG{+w}{ }\PYG{n+no}{.rodata}
+\PYG{+w}{    }\PYG{n+na}{.align}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{n+nl}{.LC0:}
+\PYG{+w}{    }\PYG{n+na}{.string}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+na}{.align}\PYG{+w}{ }\PYG{l+m+mi}{3}
+\PYG{n+nl}{.LC1:}
+\PYG{+w}{    }\PYG{n+na}{.string}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZpc{}d\PYGZbs{}n\PYGZdq{}}
+
+\PYG{+w}{    }\PYG{n+na}{.text}
+\PYG{+w}{    }\PYG{n+na}{.align}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{n+na}{.globl}\PYG{+w}{ }\PYG{n+no}{main}
+\PYG{+w}{    }\PYG{n+na}{.type}\PYG{+w}{ }\PYG{n+no}{main}\PYG{p}{,}\PYG{+w}{ }\PYG{n+na}{@function}
+
+\PYG{n+nl}{main:}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{\PYGZhy{}64}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{56}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{48}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{s1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{40}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{32}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{s3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{24}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{sd}\PYG{+w}{ }\PYG{n+no}{s4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{16}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} a = 0, b = 1, i = 1}
+\PYG{+w}{    }\PYG{n+nf}{li}\PYG{+w}{ }\PYG{n+no}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{    }\PYG{n+nf}{li}\PYG{+w}{ }\PYG{n+no}{s1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{n+nf}{li}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} scanf(\PYGZdq{}\PYGZpc{}d\PYGZdq{}, \PYGZam{}n)}
+\PYG{+w}{    }\PYG{n+nf}{lui}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}hi}\PYG{p}{(.}\PYG{n+no}{LC0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}lo}\PYG{p}{(.}\PYG{n+no}{LC0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{8}
+\PYG{+w}{    }\PYG{n+nf}{call}\PYG{+w}{ }\PYG{n+no}{scanf}
+\PYG{+w}{    }\PYG{n+nf}{lw}\PYG{+w}{ }\PYG{n+no}{s4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{8}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} 输出初始值 a}
+\PYG{+w}{    }\PYG{n+nf}{lui}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}hi}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}lo}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{mv}\PYG{+w}{ }\PYG{n+no}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s0}
+\PYG{+w}{    }\PYG{n+nf}{call}\PYG{+w}{ }\PYG{n+no}{printf}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} 输出初始值 b}
+\PYG{+w}{    }\PYG{n+nf}{lui}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}hi}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}lo}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{mv}\PYG{+w}{ }\PYG{n+no}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s1}
+\PYG{+w}{    }\PYG{n+nf}{call}\PYG{+w}{ }\PYG{n+no}{printf}
+
+\PYG{n+nl}{.Lloop:}
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} if (i \PYGZgt{}= n) 结束循环}
+\PYG{+w}{    }\PYG{n+nf}{bge}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s4}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{.Lend}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} t = b; b = a + b}
+\PYG{+w}{    }\PYG{n+nf}{mv}\PYG{+w}{ }\PYG{n+no}{s3}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s1}
+\PYG{+w}{    }\PYG{n+nf}{add}\PYG{+w}{ }\PYG{n+no}{s1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s1}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} printf(\PYGZdq{}\PYGZpc{}d\PYGZbs{}n\PYGZdq{}, b)}
+\PYG{+w}{    }\PYG{n+nf}{lui}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}hi}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nv}{\PYGZpc{}lo}\PYG{p}{(.}\PYG{n+no}{LC1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{mv}\PYG{+w}{ }\PYG{n+no}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s1}
+\PYG{+w}{    }\PYG{n+nf}{call}\PYG{+w}{ }\PYG{n+no}{printf}
+
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} a = t; i = i + 1}
+\PYG{+w}{    }\PYG{n+nf}{mv}\PYG{+w}{ }\PYG{n+no}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s3}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{n+nf}{j}\PYG{+w}{ }\PYG{n+no}{.Lloop}
+
+\PYG{n+nl}{.Lend:}
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} return 0}
+\PYG{+w}{    }\PYG{n+nf}{li}\PYG{+w}{ }\PYG{n+no}{a0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}
+
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{ra}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{56}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{s0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{48}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{s1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{40}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{s2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{32}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{s3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{24}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{ld}\PYG{+w}{ }\PYG{n+no}{s4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{16}\PYG{p}{(}\PYG{n+no}{sp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nf}{addi}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{sp}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{64}
+\PYG{+w}{    }\PYG{n+nf}{ret}
+
+\PYG{+w}{    }\PYG{n+na}{.size}\PYG{+w}{ }\PYG{n+no}{main}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{.\PYGZhy{}main}
+\PYG{+w}{    }\PYG{n+na}{.section}\PYG{+w}{ }\PYG{n+no}{.note.GNU\PYGZhy{}stack}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n+na}{@progbits}
+\end{MintedVerbatim}

@@ -1,0 +1,20 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+
+mlir\PYGZhy{}opt\PYGZhy{}14\PYG{+w}{ }vecadd.mlir\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYG{p}{|}\PYG{+w}{ }tee\PYG{+w}{ }vecadd\PYGZhy{}high\PYGZhy{}level.mlir
+
+mlir\PYGZhy{}opt\PYGZhy{}14\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}linalg\PYGZhy{}to\PYGZhy{}loops\PYG{+w}{ }vecadd.mlir\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYG{p}{|}\PYG{+w}{ }tee\PYG{+w}{ }vecadd\PYGZhy{}linalg\PYGZhy{}to\PYGZhy{}loops.mlir
+
+mlir\PYGZhy{}opt\PYGZhy{}14\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}linalg\PYGZhy{}to\PYGZhy{}loops\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}scf\PYGZhy{}to\PYGZhy{}std\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }vecadd.mlir\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }tee\PYG{+w}{ }vecadd\PYGZhy{}scf\PYGZhy{}to\PYGZhy{}cfg.mlir
+
+mlir\PYGZhy{}opt\PYGZhy{}14\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}linalg\PYGZhy{}to\PYGZhy{}loops\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}scf\PYGZhy{}to\PYGZhy{}std\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}std\PYGZhy{}to\PYGZhy{}llvm\PYG{+w}{ }\PYGZhy{}\PYGZhy{}convert\PYGZhy{}memref\PYGZhy{}to\PYGZhy{}llvm\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}reconcile\PYGZhy{}unrealized\PYGZhy{}casts\PYG{+w}{ }vecadd.mlir\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYG{p}{|}\PYG{+w}{ }tee\PYG{+w}{ }vecadd\PYGZhy{}llvm\PYGZhy{}dialect.mlir
+
+mlir\PYGZhy{}translate\PYGZhy{}14\PYG{+w}{ }\PYGZhy{}\PYGZhy{}mlir\PYGZhy{}to\PYGZhy{}llvmir\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }vecadd\PYGZhy{}llvm\PYGZhy{}dialect.mlir\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }vecadd.ll
+sed\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}1,120p\PYGZsq{}}\PYG{+w}{ }vecadd.ll
+\end{MintedVerbatim}

@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+riscv64\PYGZhy{}linux\PYGZhy{}gnu\PYGZhy{}objdump\PYG{+w}{ }\PYGZhy{}d\PYG{+w}{ }fibonacci\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYG{p}{|}\PYG{+w}{ }sed\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}/\PYGZlt{}main\PYGZgt{}:/,/\PYGZca{}\PYGZdl{}/p\PYGZsq{}}
+\end{MintedVerbatim}

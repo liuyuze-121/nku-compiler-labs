@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+clang\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}emit\PYGZhy{}llvm\PYG{+w}{ }\PYGZhy{}O0\PYG{+w}{ }main.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}O0.ll
+clang\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}emit\PYGZhy{}llvm\PYG{+w}{ }\PYGZhy{}O1\PYG{+w}{ }main.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}O1.ll
+clang\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}emit\PYGZhy{}llvm\PYG{+w}{ }\PYGZhy{}O2\PYG{+w}{ }main.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}O2.ll
+clang\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}emit\PYGZhy{}llvm\PYG{+w}{ }\PYGZhy{}O3\PYG{+w}{ }main.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main\PYGZhy{}O3.ll
+
+wc\PYG{+w}{ }\PYGZhy{}l\PYG{+w}{ }main\PYGZhy{}O0.ll\PYG{+w}{ }main\PYGZhy{}O1.ll\PYG{+w}{ }main\PYGZhy{}O2.ll\PYG{+w}{ }main\PYGZhy{}O3.ll
+\end{MintedVerbatim}

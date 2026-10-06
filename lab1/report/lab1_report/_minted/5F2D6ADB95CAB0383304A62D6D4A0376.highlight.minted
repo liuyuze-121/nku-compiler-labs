@@ -1,0 +1,3 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+clang\PYG{+w}{ }\PYGZhy{}S\PYG{+w}{ }\PYGZhy{}emit\PYGZhy{}llvm\PYG{+w}{ }main.c\PYG{+w}{ }\PYGZhy{}o\PYG{+w}{ }main.ll
+\end{MintedVerbatim}

@@ -1,0 +1,17 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYGZsh{}map = affine\PYGZus{}map\PYGZlt{}(d0) \PYGZhy{}\PYGZgt{} (d0)\PYGZgt{}
+module \PYGZob{}
+  func @vecadd(\PYGZpc{}arg0: memref\PYGZlt{}16xi16\PYGZgt{}, \PYGZpc{}arg1: memref\PYGZlt{}16xi16\PYGZgt{},
+               \PYGZpc{}arg2: memref\PYGZlt{}16xi16\PYGZgt{}) \PYGZob{}
+    linalg.generic \PYGZob{}indexing\PYGZus{}maps = [\PYGZsh{}map, \PYGZsh{}map, \PYGZsh{}map],
+                    iterator\PYGZus{}types = [\PYGZdq{}parallel\PYGZdq{}]\PYGZcb{}
+        ins(\PYGZpc{}arg0, \PYGZpc{}arg1 : memref\PYGZlt{}16xi16\PYGZgt{}, memref\PYGZlt{}16xi16\PYGZgt{})
+        outs(\PYGZpc{}arg2 : memref\PYGZlt{}16xi16\PYGZgt{}) \PYGZob{}
+    \PYGZca{}bb0(\PYGZpc{}arg3: i16, \PYGZpc{}arg4: i16, \PYGZpc{}arg5: i16):
+      \PYGZpc{}0 = arith.addi \PYGZpc{}arg3, \PYGZpc{}arg4 : i16
+      linalg.yield \PYGZpc{}0 : i16
+    \PYGZcb{}
+    return
+  \PYGZcb{}
+\PYGZcb{}
+\end{MintedVerbatim}
